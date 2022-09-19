@@ -6,16 +6,8 @@ fetch('./Data.json')
          intitMainFunction(json);
 });;
    
-var increment=0;
-var manuplateCoordinatesForRectangle=0;
+function intitMainFunction(bboxesjosn) {  
 
-function intitMainFunction(bboxesjosn){
-    for(let i = 0; i < bboxesjosn.length; i++) {
-    let obj = bboxesjosn[i];
-    console.log("obj.id "+obj.coordinates[0]);
-}
-
-const button = document.querySelector("#close");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 base_image = new Image();
@@ -29,7 +21,6 @@ ctx1.globalAlpha = 0.5;
 
 rect = {},
 drag = false;
-drag1=false;
 var dragging=false;
 var mousexcoordinates = null;
 var mouseycoordinates = null;
@@ -67,9 +58,7 @@ if(!dragging){
 const rect = canvas1.getBoundingClientRect();
 const transform = ctx1.getTransform();
 mousexcoordinates = ((e.clientX - rect.left) / (rect.right - rect.left)) * canvas1.width;
-mouseycoordinates =+
- ((e.clientY - rect.top) / (rect.bottom - rect.top)) * canvas1.height,
- console.log(mousexcoordinates+" "+mouseycoordinates);
+mouseycoordinates = ((e.clientY - rect.top) / (rect.bottom - rect.top)) * canvas1.height;
 
 for(let i = 0; i < bboxesjosn.length; i++) {
     let obj = bboxesjosn[i];
@@ -82,9 +71,7 @@ ctx1.clearRect(obj.coordinates[0],obj.coordinates[1],obj.coordinates[2],obj.coor
 }}}}
 
 function draw() {
-console.log("draw "+dragging);
 dragging=true;
-drag1=true;
 ctx1.setLineDash([6]);
 ctx1.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
 var x1=rect.startX+rect.w;
@@ -104,9 +91,7 @@ document.testform.name.value=result;
 }
 }
 
-//=====================
-//zoom in and zoom out
-
+//===================== For Zooming
 function zoomin(){
     var body = document.getElementById("canvas");
     var currWidth = body.clientWidth;
@@ -119,14 +104,13 @@ function zoomin(){
 }
 
 function zoomout() {
-var zoomout = document.getElementById("canvas");
-var currWidth = zoomout.clientWidth;
-zoomout.style.width = (currWidth - 50) + "px";
-manuplateCoordinatesForRectangle+=5;
+    var zoomout = document.getElementById("canvas");
+    var currWidth = zoomout.clientWidth;
+    zoomout.style.width = (currWidth - 50) + "px";
 
-var zoomout = document.getElementById("canvas1");
-var currWidth = zoomout.clientWidth;
-zoomout.style.width = (currWidth - 50) + "px";
+    var zoomout = document.getElementById("canvas1");
+    var currWidth = zoomout.clientWidth;
+    zoomout.style.width = (currWidth - 50) + "px";
 }
 
 
